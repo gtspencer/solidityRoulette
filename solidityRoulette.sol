@@ -10,7 +10,7 @@ contract SolidityRoulette {
 
     function roulette() public payable {
         require(msg.value > 0, "stake something coward");
-        if (random() > 1) {
+        if (random() == 1) {
             emit Win(msg.sender, msg.value);
             payable(msg.sender).transfer(msg.value);
         }
@@ -22,6 +22,6 @@ contract SolidityRoulette {
     }
 
     function random() public view returns(uint){
-        return uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % 3;
+        return uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, msg.sender))) % 2;
     }
 }
